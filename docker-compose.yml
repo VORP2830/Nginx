@@ -1,0 +1,56 @@
+version: '3'
+services:
+  nginx_prx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: nginx_prx
+    volumes:
+      - ./Conf:/etc/nginx/conf:ro
+      - ./log:/var/log/nginx
+    ports:
+      - 90:80
+    depends_on:
+      - server1
+      - server2
+      - server3
+    networks:
+      - nginx_ntw
+
+  server1:
+    build:
+      context: ./Server1
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: server1
+    ports:
+      - 91:8080
+    networks:
+      - nginx_ntw
+  
+  server2:
+    build:
+      context: ./Server2
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: server2
+    ports:
+      - 92:8080
+    networks:
+      - nginx_ntw
+  
+  server3:
+    build:
+      context: ./Server3
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: server3
+    ports:
+      - 93:8080
+    networks:
+      - nginx_ntw
+
+networks:
+  nginx_ntw:
+    driver: bridge
