@@ -1,6 +1,6 @@
 version: '3'
 services:
-  nginx_prx:
+  nginx:
     build: 
       context: ./Nginx
       dockerfile: Dockerfile
