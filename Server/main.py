@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify
+import os
 
 app = Flask(__name__)
 
-server_number = 2
+server_number = os.getenv("SERVER_NUMBER")
 
 @app.route("/api", methods=["GET"])
 def functionApi():

@@ -1,4 +1,3 @@
-version: '3'
 services:
   nginx:
     build: 
@@ -19,28 +18,34 @@ services:
 
   server1:
     build:
-      context: ./Server1
+      context: ./Server
       dockerfile: Dockerfile
     restart: unless-stopped
     container_name: server1
+    environment:
+      - SERVER_NUMBER=1
     networks:
       - nginx_ntw
   
   server2:
     build:
-      context: ./Server2
+      context: ./Server
       dockerfile: Dockerfile
     restart: unless-stopped
     container_name: server2
+    environment:
+      - SERVER_NUMBER=2
     networks:
       - nginx_ntw
   
   server3:
     build:
-      context: ./Server3
+      context: ./Server
       dockerfile: Dockerfile
     restart: unless-stopped
     container_name: server3
+    environment:
+      - SERVER_NUMBER=3
     networks:
       - nginx_ntw
 
